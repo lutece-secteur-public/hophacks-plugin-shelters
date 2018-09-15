@@ -11,9 +11,10 @@
     <@messages infos=infos />
 
     <#list shelter_list as shelter >
-        <div class="col-md-4 card">
-            <h3>${shelter.name}</h3>
+    <div class="col-md-4">
+        <div style="margin: 10px; padding: 20px;background-color: #eee ">
             <div class="pull-right">  <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> </div>
+            <h2>${shelter.name}</h2>
             <p>    ${shelter.description}</p>
             <p>  <i class="fa map-marker-alt"></i>  ${shelter.address} </p>
             <p>  <i class="fa fa-phone"></i>  ${shelter.phoneNumber} </p>
@@ -24,7 +25,8 @@
                 <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=true />
             </div>
         </div>
-        </#list>
+    </div>
+    </#list>
     
 
 
