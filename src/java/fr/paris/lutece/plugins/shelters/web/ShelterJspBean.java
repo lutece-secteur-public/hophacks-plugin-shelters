@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2018, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,7 @@
  *
  * License 1.0
  */
+ 	
 package fr.paris.lutece.plugins.shelters.web;
 
 import fr.paris.lutece.plugins.shelters.business.Shelter;
@@ -50,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
  * This class provides the user interface to manage Shelter features ( manage, create, modify, remove )
  */
 @Controller( controllerJsp = "ManageShelters.jsp", controllerPath = "jsp/admin/plugins/shelters/", right = "SHELTERS_MANAGEMENT" )
-public class ShelterJspBean extends ManageSheltersJspBean
+public class ShelterJspBean extends AbstractManageSheltersJspBean
 {
     // Templates
     private static final String TEMPLATE_MANAGE_SHELTERS = "/admin/plugins/shelters/manage_shelters.html";
@@ -137,7 +138,7 @@ public class ShelterJspBean extends ManageSheltersJspBean
     @Action( ACTION_CREATE_SHELTER )
     public String doCreateShelter( HttpServletRequest request )
     {
-        populate( _shelter, request );
+        populate( _shelter, request, request.getLocale( ) );
 
         // Check constraints
         if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )
@@ -197,7 +198,7 @@ public class ShelterJspBean extends ManageSheltersJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_SHELTER ) );
 
-        if ( _shelter == null || ( _shelter.getId(  ) != nId ))
+        if ( _shelter == null || ( _shelter.getId(  ) != nId ) )
         {
             _shelter = ShelterHome.findByPrimaryKey( nId );
         }
@@ -217,7 +218,7 @@ public class ShelterJspBean extends ManageSheltersJspBean
     @Action( ACTION_MODIFY_SHELTER )
     public String doModifyShelter( HttpServletRequest request )
     {
-        populate( _shelter, request );
+        populate( _shelter, request, request.getLocale( ) );
 
         // Check constraints
         if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )

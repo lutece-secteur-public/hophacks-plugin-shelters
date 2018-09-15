@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2018, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,8 +33,10 @@
  */ 
 package fr.paris.lutece.plugins.shelters.business;
 
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.Email;
 import java.io.Serializable;
 
 /**
@@ -75,6 +77,8 @@ public class Shelter implements Serializable
     private int _nLocationLat;
     
     private int _nLocationLon;
+    
+    private String _strAddress;
 
     /**
      * Returns the Id
@@ -272,5 +276,23 @@ public class Shelter implements Serializable
     public void setLocationLon( int nLocationLon )
     {
         _nLocationLon = nLocationLon;
+    }
+    
+    /**
+     * Returns the Address
+     * @return The Address
+     */
+    public String getAddress( )
+    {
+        return _strAddress;
+    }
+
+    /**
+     * Sets the Address
+     * @param strAddress The Address
+     */ 
+    public void setAddress( String strAddress )
+    {
+        _strAddress = strAddress;
     }
 }

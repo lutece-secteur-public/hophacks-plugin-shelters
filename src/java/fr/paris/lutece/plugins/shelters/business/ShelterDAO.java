@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2018, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,7 @@ package fr.paris.lutece.plugins.shelters.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.sql.DAOUtil;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,33 +48,12 @@ import java.util.List;
 public final class ShelterDAO implements IShelterDAO
 {
     // Constants
-    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_shelter ) FROM shelters_shelter";
-    private static final String SQL_QUERY_SELECT = "SELECT id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon FROM shelters_shelter WHERE id_shelter = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO shelters_shelter ( id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon, address FROM shelters_shelter WHERE id_shelter = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO shelters_shelter ( name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM shelters_shelter WHERE id_shelter = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE shelters_shelter SET id_shelter = ?, name = ?, description = ?, email = ?, web_site = ?, workgroup_key = ?, reminder_status = ?, bed_capacity = ?, phone_number = ?, location_lat = ?, location_lon = ? WHERE id_shelter = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon FROM shelters_shelter";
+    private static final String SQL_QUERY_UPDATE = "UPDATE shelters_shelter SET id_shelter = ?, name = ?, description = ?, email = ?, web_site = ?, workgroup_key = ?, reminder_status = ?, bed_capacity = ?, phone_number = ?, location_lat = ?, location_lon = ?, address = ? WHERE id_shelter = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon, address FROM shelters_shelter";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_shelter FROM shelters_shelter";
-
-    /**
-     * Generates a new primary key
-     * @param plugin The Plugin
-     * @return The new primary key
-     */
-    public int newPrimaryKey( Plugin plugin)
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK , plugin  );
-        daoUtil.executeQuery( );
-        int nKey = 1;
-
-        if( daoUtil.next( ) )
-        {
-            nKey = daoUtil.getInt( 1 ) + 1;
-        }
-
-        daoUtil.free();
-        return nKey;
-    }
 
     /**
      * {@inheritDoc }
@@ -81,24 +61,32 @@ public final class ShelterDAO implements IShelterDAO
     @Override
     public void insert( Shelter shelter, Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
-        shelter.setId( newPrimaryKey( plugin ) );
-        int nIndex = 1;
-        
-        daoUtil.setInt( nIndex++ , shelter.getId( ) );
-        daoUtil.setString( nIndex++ , shelter.getName( ) );
-        daoUtil.setString( nIndex++ , shelter.getDescription( ) );
-        daoUtil.setString( nIndex++ , shelter.getEmail( ) );
-        daoUtil.setString( nIndex++ , shelter.getWebSite( ) );
-        daoUtil.setString( nIndex++ , shelter.getWorkgroupKey( ) );
-        daoUtil.setBoolean( nIndex++ , shelter.getReminderStatus( ) );
-        daoUtil.setInt( nIndex++ , shelter.getBedCapacity( ) );
-        daoUtil.setString( nIndex++ , shelter.getPhoneNumber( ) );
-        daoUtil.setInt( nIndex++ , shelter.getLocationLat( ) );
-        daoUtil.setInt( nIndex++ , shelter.getLocationLon( ) );
-
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin );
+        try
+        {
+            int nIndex = 1;
+            daoUtil.setString( nIndex++ , shelter.getName( ) );
+            daoUtil.setString( nIndex++ , shelter.getDescription( ) );
+            daoUtil.setString( nIndex++ , shelter.getEmail( ) );
+            daoUtil.setString( nIndex++ , shelter.getWebSite( ) );
+            daoUtil.setString( nIndex++ , shelter.getWorkgroupKey( ) );
+            daoUtil.setBoolean( nIndex++ , shelter.getReminderStatus( ) );
+            daoUtil.setInt( nIndex++ , shelter.getBedCapacity( ) );
+            daoUtil.setString( nIndex++ , shelter.getPhoneNumber( ) );
+            daoUtil.setInt( nIndex++ , shelter.getLocationLat( ) );
+            daoUtil.setInt( nIndex++ , shelter.getLocationLon( ) );
+            daoUtil.setString( nIndex++ , shelter.getAddress( ) );
+            
+            daoUtil.executeUpdate( );
+            if ( daoUtil.nextGeneratedKey( ) ) 
+            {
+                shelter.setId( daoUtil.getGeneratedKeyInt( 1 ) );
+            }
+        }
+        finally
+        {
+            daoUtil.free( );
+        }
     }
 
     /**
@@ -128,6 +116,7 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
             shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
             shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setAddress( daoUtil.getString( nIndex++ ) );
         }
 
         daoUtil.free( );
@@ -166,6 +155,7 @@ public final class ShelterDAO implements IShelterDAO
         daoUtil.setString( nIndex++ , shelter.getPhoneNumber( ) );
         daoUtil.setInt( nIndex++ , shelter.getLocationLat( ) );
         daoUtil.setInt( nIndex++ , shelter.getLocationLon( ) );
+        daoUtil.setString( nIndex++ , shelter.getAddress( ) );
         daoUtil.setInt( nIndex , shelter.getId( ) );
 
         daoUtil.executeUpdate( );
@@ -198,6 +188,7 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
             shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
             shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setAddress( daoUtil.getString( nIndex++ ) );
 
             shelterList.add( shelter );
         }

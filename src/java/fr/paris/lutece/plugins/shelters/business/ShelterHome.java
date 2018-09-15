@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2018, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -96,7 +96,7 @@ public final class ShelterHome
      */
     public static Shelter findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin);
+        return _dao.load( nKey, _plugin );
     }
 
     /**
@@ -123,7 +123,7 @@ public final class ShelterHome
      */
     public static ReferenceList getSheltersReferenceList( )
     {
-        return _dao.selectSheltersReferenceList(_plugin );
+        return _dao.selectSheltersReferenceList( _plugin );
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2018, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,29 +37,37 @@ package fr.paris.lutece.plugins.shelters.business;
 import fr.paris.lutece.test.LuteceTestCase;
 
 
+/**
+ * This is the business class test for the object Shelter
+ */
 public class ShelterBusinessTest extends LuteceTestCase
 {
-    private final static String NAME1 = "Name1";
-    private final static String NAME2 = "Name2";
-    private final static String DESCRIPTION1 = "Description1";
-    private final static String DESCRIPTION2 = "Description2";
-    private final static String EMAIL1 = "Email1";
-    private final static String EMAIL2 = "Email2";
-    private final static String WEBSITE1 = "WebSite1";
-    private final static String WEBSITE2 = "WebSite2";
-    private final static String WORKGROUPKEY1 = "WorkgroupKey1";
-    private final static String WORKGROUPKEY2 = "WorkgroupKey2";
-	private final static boolean REMINDERSTATUS1 = true;
-    private final static boolean REMINDERSTATUS2 = false;
-    private final static int BEDCAPACITY1 = 1;
-    private final static int BEDCAPACITY2 = 2;
-    private final static String PHONENUMBER1 = "PhoneNumber1";
-    private final static String PHONENUMBER2 = "PhoneNumber2";
-    private final static int LOCATIONLAT1 = 1;
-    private final static int LOCATIONLAT2 = 2;
-    private final static int LOCATIONLON1 = 1;
-    private final static int LOCATIONLON2 = 2;
+    private static final String NAME1 = "Name1";
+    private static final String NAME2 = "Name2";
+    private static final String DESCRIPTION1 = "Description1";
+    private static final String DESCRIPTION2 = "Description2";
+    private static final String EMAIL1 = "Email1";
+    private static final String EMAIL2 = "Email2";
+    private static final String WEBSITE1 = "WebSite1";
+    private static final String WEBSITE2 = "WebSite2";
+    private static final String WORKGROUPKEY1 = "WorkgroupKey1";
+    private static final String WORKGROUPKEY2 = "WorkgroupKey2";
+	private static final boolean REMINDERSTATUS1 = true;
+    private static final boolean REMINDERSTATUS2 = false;
+    private static final int BEDCAPACITY1 = 1;
+    private static final int BEDCAPACITY2 = 2;
+    private static final String PHONENUMBER1 = "PhoneNumber1";
+    private static final String PHONENUMBER2 = "PhoneNumber2";
+    private static final int LOCATIONLAT1 = 1;
+    private static final int LOCATIONLAT2 = 2;
+    private static final int LOCATIONLON1 = 1;
+    private static final int LOCATIONLON2 = 2;
+    private static final String ADDRESS1 = "Address1";
+    private static final String ADDRESS2 = "Address2";
 
+	/**
+	* test Shelter
+	*/
     public void testBusiness(  )
     {
         // Initialize an object
@@ -74,6 +82,7 @@ public class ShelterBusinessTest extends LuteceTestCase
         shelter.setPhoneNumber( PHONENUMBER1 );
         shelter.setLocationLat( LOCATIONLAT1 );
         shelter.setLocationLon( LOCATIONLON1 );
+        shelter.setAddress( ADDRESS1 );
 
         // Create test
         ShelterHome.create( shelter );
@@ -88,6 +97,7 @@ public class ShelterBusinessTest extends LuteceTestCase
         assertEquals( shelterStored.getPhoneNumber() , shelter.getPhoneNumber( ) );
         assertEquals( shelterStored.getLocationLat() , shelter.getLocationLat( ) );
         assertEquals( shelterStored.getLocationLon() , shelter.getLocationLon( ) );
+        assertEquals( shelterStored.getAddress() , shelter.getAddress( ) );
 
         // Update test
         shelter.setName( NAME2 );
@@ -100,6 +110,7 @@ public class ShelterBusinessTest extends LuteceTestCase
         shelter.setPhoneNumber( PHONENUMBER2 );
         shelter.setLocationLat( LOCATIONLAT2 );
         shelter.setLocationLon( LOCATIONLON2 );
+        shelter.setAddress( ADDRESS2 );
         ShelterHome.update( shelter );
         shelterStored = ShelterHome.findByPrimaryKey( shelter.getId( ) );
         assertEquals( shelterStored.getName() , shelter.getName( ) );
@@ -112,6 +123,7 @@ public class ShelterBusinessTest extends LuteceTestCase
         assertEquals( shelterStored.getPhoneNumber() , shelter.getPhoneNumber( ) );
         assertEquals( shelterStored.getLocationLat() , shelter.getLocationLat( ) );
         assertEquals( shelterStored.getLocationLon() , shelter.getLocationLon( ) );
+        assertEquals( shelterStored.getAddress() , shelter.getAddress( ) );
 
         // List test
         ShelterHome.getSheltersList();
