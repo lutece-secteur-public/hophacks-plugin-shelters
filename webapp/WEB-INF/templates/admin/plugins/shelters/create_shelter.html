@@ -1,0 +1,22 @@
+<#include "manageshelters_tabs.html" />
+<@tabs tab="shelter" />
+
+<@rowBoxHeader i18nTitleKey="shelters.create_shelter.title">
+    <form class="form-horizontal" method="post" name="create_shelter" action="jsp/admin/plugins/shelters/ManageShelters.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelName" inputName="name" mandatory=true value="${shelter.name!''}" i18nHelpBlockKey="shelters.create_shelter.labelName.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelDescription" inputName="description"  value="${shelter.description!''}" i18nHelpBlockKey="shelters.create_shelter.labelDescription.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelEmail" inputName="email" mandatory=true value="${shelter.email!''}" i18nHelpBlockKey="shelters.create_shelter.labelEmail.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelWebSite" inputName="web_site"  value="${shelter.webSite!''}" i18nHelpBlockKey="shelters.create_shelter.labelWebSite.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelWorkgroupKey" inputName="workgroup_key" mandatory=true value="${shelter.workgroupKey!''}" i18nHelpBlockKey="shelters.create_shelter.labelWorkgroupKey.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelReminderStatus" inputName="reminder_status"  value="${shelter.reminderStatus!''}" i18nHelpBlockKey="shelters.create_shelter.labelReminderStatus.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelBedCapacity" inputName="bed_capacity"  value="${shelter.bedCapacity!''}" i18nHelpBlockKey="shelters.create_shelter.labelBedCapacity.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelPhoneNumber" inputName="phone_number"  value="${shelter.phoneNumber!''}" i18nHelpBlockKey="shelters.create_shelter.labelPhoneNumber.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelLocationLat" inputName="location_lat"  value="${shelter.locationLat!''}" i18nHelpBlockKey="shelters.create_shelter.labelLocationLat.help" />
+        <@fieldInputText i18nLabelKey="shelters.create_shelter.labelLocationLon" inputName="location_lon"  value="${shelter.locationLon!''}" i18nHelpBlockKey="shelters.create_shelter.labelLocationLon.help" />
+        <@actionButtons button1Name="action_createShelter" button2Name="view_manageShelters"/>
+    </form>
+</@rowBoxHeader>
+

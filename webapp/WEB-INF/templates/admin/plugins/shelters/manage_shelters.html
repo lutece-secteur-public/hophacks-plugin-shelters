@@ -1,0 +1,88 @@
+<#include "manageshelters_tabs.html" />
+<@tabs tab="shelter" />
+
+<@rowBox>
+    <@boxHeader i18nTitleKey="shelters.manage_shelters.title">
+        <@headerButtons>
+
+        
+        <form class="form-inline pull-right" method="post" name="manage_shelters" action="jsp/admin/plugins/shelters/ManageShelters.jsp">
+            <!-- Add pull-right to class1 -->
+            <@actionButtons button1Name="view_createShelter" icon1="icon-plus icon-white" i18nValue1Key="shelters.manage_shelters.buttonAdd" />
+        </form>
+        
+    </@headerButtons>
+    </@boxHeader>
+    <@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{shelters.manage_shelters.columnName}</th>
+            <th>#i18n{shelters.manage_shelters.columnDescription}</th>
+            <th>#i18n{shelters.manage_shelters.columnEmail}</th>
+            <th>#i18n{shelters.manage_shelters.columnWebSite}</th>
+            <th>#i18n{shelters.manage_shelters.columnWorkgroupKey}</th>
+            <th>#i18n{shelters.manage_shelters.columnReminderStatus}</th>
+            <th>#i18n{shelters.manage_shelters.columnBedCapacity}</th>
+            <th>#i18n{shelters.manage_shelters.columnPhoneNumber}</th>
+            <th>#i18n{shelters.manage_shelters.columnLocationLat}</th>
+            <th>#i18n{shelters.manage_shelters.columnLocationLon}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list shelter_list as shelter >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${shelter.name}
+            </td>
+            <td>
+                ${shelter.description}
+            </td>
+            <td>
+                ${shelter.email}
+            </td>
+            <td>
+                ${shelter.webSite}
+            </td>
+            <td>
+                ${shelter.workgroupKey}
+            </td>
+            <td>
+                ${shelter.reminderStatus}
+            </td>
+            <td>
+                ${shelter.bedCapacity}
+            </td>
+            <td>
+                ${shelter.phoneNumber}
+            </td>
+            <td>
+                ${shelter.locationLat}
+            </td>
+            <td>
+                ${shelter.locationLon}
+            </td>
+        <td>
+            <a href="jsp/admin/plugins/shelters/ManageShelters.jsp?view=modifyShelter&id=${shelter.id}"
+               class="btn btn-primary btn-sm" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-pencil"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}"
+               class="btn btn-danger btn-sm" title="#i18n{portal.util.labelDelete}" >
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@rowBox>
+
