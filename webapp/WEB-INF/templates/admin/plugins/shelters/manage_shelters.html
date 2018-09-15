@@ -9,72 +9,24 @@
 	</@boxHeader>
 	<@boxBody>    
     <@messages infos=infos />
-    <@paginationAdmin paginator=paginator combo=1 />
-    <div class="clearfix"></div>
-    <@table>
-        <tr>
-            <input type="hidden" id="id" name="id"/>
-            <th>#i18n{shelters.manage_shelters.columnName}</th>
-            <th>#i18n{shelters.manage_shelters.columnDescription}</th>
-            <th>#i18n{shelters.manage_shelters.columnEmail}</th>
-            <th>#i18n{shelters.manage_shelters.columnWebSite}</th>
-            <th>#i18n{shelters.manage_shelters.columnWorkgroupKey}</th>
-            <th>#i18n{shelters.manage_shelters.columnReminderStatus}</th>
-            <th>#i18n{shelters.manage_shelters.columnBedCapacity}</th>
-            <th>#i18n{shelters.manage_shelters.columnPhoneNumber}</th>
-            <th>#i18n{shelters.manage_shelters.columnLocationLat}</th>
-            <th>#i18n{shelters.manage_shelters.columnLocationLon}</th>
-            <th>#i18n{shelters.manage_shelters.columnAddress}</th>
-            <th>#i18n{portal.util.labelActions}</th>
-        </tr>
-        <@tableHeadBodySeparator />
-            <#list shelter_list as shelter >
-        <tr>
-            <input type="hidden" id="id" name="id"/>
-            <td>
-                ${shelter.name}
-            </td>
-            <td>
-                ${shelter.description}
-            </td>
-            <td>
-                ${shelter.email}
-            </td>
-            <td>
-                ${shelter.webSite}
-            </td>
-            <td>
-                ${shelter.workgroupKey}
-            </td>
-            <td>
-                ${shelter.reminderStatus?string('yes', 'no')}
-            </td>
-            <td>
-                ${shelter.bedCapacity}
-            </td>
-            <td>
-                ${shelter.phoneNumber}
-            </td>
-            <td>
-                ${shelter.locationLat}
-            </td>
-            <td>
-                ${shelter.locationLon}
-            </td>
-            <td>
-                ${shelter.address}
-            </td>
-        <td>
-			<@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?view=modifyShelter&id=${shelter.id}' title='#i18n{portal.util.labelModify}' buttonIcon='pencil' showTitle=false />
-						
-			<@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=false />
 
-        </td>
-        </tr>
+    <#list shelter_list as shelter >
+        <div class="col-md-4 card">
+            <h3>${shelter.name}</h3>
+            <div class="pull-right">  <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> </div>
+            <p>    ${shelter.description}</p>
+            <p>  <i class="fa map-marker-alt"></i>  ${shelter.address} </p>
+            <p>  <i class="fa fa-phone"></i>  ${shelter.phoneNumber} </p>
+            <p>  <i class="fa fa-at"></i>  ${shelter.email} </p>
+            <p>  <i class="fa fa-globe"></i>  ${shelter.webSite} </p>
+            <div class="pull-right">
+                <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?view=modifyShelter&id=${shelter.id}' title='#i18n{portal.util.labelModify}' buttonIcon='pencil' showTitle=true />
+                <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=true />
+            </div>
+        </div>
         </#list>
-    </@table>
+    
 
-    <@paginationAdmin paginator=paginator />
 
   </@boxBody>
 </@box>
