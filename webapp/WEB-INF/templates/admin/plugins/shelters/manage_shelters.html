@@ -47,7 +47,7 @@
                 ${shelter.workgroupKey}
             </td>
             <td>
-                ${shelter.reminderStatus}
+                ${shelter.reminderStatus?string('yes', 'no')}
             </td>
             <td>
                 ${shelter.bedCapacity}

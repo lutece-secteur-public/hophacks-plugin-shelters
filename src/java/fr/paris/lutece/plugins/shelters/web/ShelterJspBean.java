@@ -36,12 +36,16 @@ package fr.paris.lutece.plugins.shelters.web;
 
 import fr.paris.lutece.plugins.shelters.business.Shelter;
 import fr.paris.lutece.plugins.shelters.business.ShelterHome;
+import fr.paris.lutece.portal.business.workgroup.AdminWorkgroup;
+import fr.paris.lutece.portal.business.workgroup.AdminWorkgroupHome;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.url.UrlItem;
+import java.util.Collection;
 
 import java.util.List;
 import java.util.Map;
@@ -69,7 +73,8 @@ public class ShelterJspBean extends AbstractManageSheltersJspBean
     // Markers
     private static final String MARK_SHELTER_LIST = "shelter_list";
     private static final String MARK_SHELTER = "shelter";
-
+    private static final String MARK_WORKGROUPS_LIST = "workgroups_list";
+    
     private static final String JSP_MANAGE_SHELTERS = "jsp/admin/plugins/shelters/ManageShelters.jsp";
 
     // Properties
@@ -123,8 +128,13 @@ public class ShelterJspBean extends AbstractManageSheltersJspBean
     {
         _shelter = ( _shelter != null ) ? _shelter : new Shelter(  );
 
+        Collection<AdminWorkgroup> workgroupsList = AdminWorkgroupHome.findAll();
+        ReferenceList listWorkgroups = ReferenceList.convert( workgroupsList, "key" , "description", false );
+
         Map<String, Object> model = getModel(  );
         model.put( MARK_SHELTER, _shelter );
+        model.put( MARK_WORKGROUPS_LIST, listWorkgroups );
+        
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_SHELTER, TEMPLATE_CREATE_SHELTER, model );
     }
@@ -203,8 +213,12 @@ public class ShelterJspBean extends AbstractManageSheltersJspBean
             _shelter = ShelterHome.findByPrimaryKey( nId );
         }
 
+        Collection<AdminWorkgroup> workgroupsList = AdminWorkgroupHome.findAll();
+        ReferenceList listWorkgroups = ReferenceList.convert( workgroupsList, "key" , "description", false );
+
         Map<String, Object> model = getModel(  );
         model.put( MARK_SHELTER, _shelter );
+        model.put( MARK_WORKGROUPS_LIST, listWorkgroups );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_SHELTER, TEMPLATE_MODIFY_SHELTER, model );
     }

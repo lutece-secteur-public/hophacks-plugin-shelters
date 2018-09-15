@@ -21,10 +21,9 @@
 					<@input type='text' name='web_site' value='${shelter.webSite}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelWorkgroupKey}' helpKey='#i18n{shelters.modify_shelter.labelWorkgroupKey.help}' mandatory=true>
-					<@input type='text' name='workgroup_key' value='${shelter.workgroupKey}' />
+                                    <@select name='workgroup_key' id='workgroup_key' default_value='${shelter.workgroupKey!\'\'}' items=workgroups_list sort=true />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelReminderStatus}' helpKey='#i18n{shelters.modify_shelter.labelReminderStatus.help}' >
-					<@input type='text' name='reminder_status' value='${shelter.reminderStatus}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelBedCapacity}' helpKey='#i18n{shelters.modify_shelter.labelBedCapacity.help}' >
 					<@input type='text' name='bed_capacity' value='${shelter.bedCapacity}' />

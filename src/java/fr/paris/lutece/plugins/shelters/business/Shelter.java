@@ -74,9 +74,9 @@ public class Shelter implements Serializable
     @Size( max = 50 , message = "#i18n{shelters.validation.shelter.PhoneNumber.size}" ) 
     private String _strPhoneNumber;
     
-    private int _nLocationLat;
+    private float _nLocationLat;
     
-    private int _nLocationLon;
+    private float _nLocationLon;
     
     private String _strAddress;
 
@@ -246,7 +246,7 @@ public class Shelter implements Serializable
      * Returns the LocationLat
      * @return The LocationLat
      */
-    public int getLocationLat( )
+    public float getLocationLat( )
     {
         return _nLocationLat;
     }
@@ -255,7 +255,7 @@ public class Shelter implements Serializable
      * Sets the LocationLat
      * @param nLocationLat The LocationLat
      */ 
-    public void setLocationLat( int nLocationLat )
+    public void setLocationLat( float nLocationLat )
     {
         _nLocationLat = nLocationLat;
     }
@@ -264,7 +264,7 @@ public class Shelter implements Serializable
      * Returns the LocationLon
      * @return The LocationLon
      */
-    public int getLocationLon( )
+    public float getLocationLon( )
     {
         return _nLocationLon;
     }
@@ -273,7 +273,7 @@ public class Shelter implements Serializable
      * Sets the LocationLon
      * @param nLocationLon The LocationLon
      */ 
-    public void setLocationLon( int nLocationLon )
+    public void setLocationLon( float nLocationLon )
     {
         _nLocationLon = nLocationLon;
     }
