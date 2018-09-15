@@ -125,5 +125,17 @@ public final class ShelterHome
     {
         return _dao.selectSheltersReferenceList( _plugin );
     }
+    
+    /**
+     * Load the data of all the shelter objects and returns them as a list
+     * @return the list which contains the data of all the shelter objects
+     */
+    public static List<Shelter> getSheltersByAdminUser( int nIdUser )
+    {
+        return _dao.selectSheltersByAdminUser( nIdUser ,  _plugin );
+    }
+    
+    
+    
 }
 

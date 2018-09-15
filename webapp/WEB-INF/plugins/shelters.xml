@@ -29,6 +29,14 @@
             <feature-url>jsp/admin/plugins/shelters/ManageShelters.jsp</feature-url>
             <feature-icon-url></feature-icon-url>
       </admin-feature>
+        <admin-feature>
+            <feature-id>SHELTERS_BED_MANAGEMENT</feature-id>
+            <feature-title>shelters.adminFeature.ManageBeds.name</feature-title>
+            <feature-description>shelters.adminFeature.ManageBeds.description</feature-description>
+            <feature-level>2</feature-level>
+            <feature-url>jsp/admin/plugins/shelters/ManageBeds.jsp</feature-url>
+            <feature-icon-url></feature-icon-url>
+      </admin-feature>
     </admin-features>    
 
     <!-- XPages parameters -->

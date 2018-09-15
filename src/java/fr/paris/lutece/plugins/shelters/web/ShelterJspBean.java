@@ -40,6 +40,7 @@ import fr.paris.lutece.portal.business.workgroup.AdminWorkgroup;
 import fr.paris.lutece.portal.business.workgroup.AdminWorkgroupHome;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
+import fr.paris.lutece.portal.util.mvc.admin.MVCAdminJspBean;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
@@ -55,7 +56,7 @@ import javax.servlet.http.HttpServletRequest;
  * This class provides the user interface to manage Shelter features ( manage, create, modify, remove )
  */
 @Controller( controllerJsp = "ManageShelters.jsp", controllerPath = "jsp/admin/plugins/shelters/", right = "SHELTERS_MANAGEMENT" )
-public class ShelterJspBean extends AbstractManageSheltersJspBean
+public class ShelterJspBean extends MVCAdminJspBean
 {
     // Templates
     private static final String TEMPLATE_MANAGE_SHELTERS = "/admin/plugins/shelters/manage_shelters.html";
@@ -112,7 +113,8 @@ public class ShelterJspBean extends AbstractManageSheltersJspBean
     {
         _shelter = null;
         List<Shelter> listShelters = ShelterHome.getSheltersList(  );
-        Map<String, Object> model = getPaginatedListModel( request, MARK_SHELTER_LIST, listShelters, JSP_MANAGE_SHELTERS );
+        Map<String, Object> model = getModel();
+        model.put( MARK_SHELTER_LIST, listShelters );
 
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_SHELTERS, TEMPLATE_MANAGE_SHELTERS, model );
     }

@@ -1,8 +1,5 @@
 <@box>
-	<@boxHeader title='#i18n{shelters.manage_shelter.title}' boxTools=true>
-		<@tform class='form-inline pull-right' name='manage_shelter' action='jsp/admin/plugins/shelters/ManageShelters.jsp'>
-			<@button type='submit' name='view_createShelter' buttonIcon='plus' title='#i18n{shelters.manage_shelters.buttonAdd}' />
-		</@tform>
+	<@boxHeader title='#i18n{shelters.manage_beds.title}' boxTools=true>
 	</@boxHeader>
 	<@boxBody>    
     <@messages infos=infos />
@@ -19,7 +16,6 @@
             <p>  <i class="fa fa-globe"></i>  ${shelter.webSite} </p>
             <div class="pull-right">
                 <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?view=modifyShelter&id=${shelter.id}' title='#i18n{portal.util.labelModify}' buttonIcon='pencil' showTitle=true />
-                <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=true />
             </div>
         </div>
     </div>

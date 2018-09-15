@@ -54,6 +54,8 @@ public final class ShelterDAO implements IShelterDAO
     private static final String SQL_QUERY_UPDATE = "UPDATE shelters_shelter SET id_shelter = ?, name = ?, description = ?, email = ?, web_site = ?, workgroup_key = ?, reminder_status = ?, bed_capacity = ?, phone_number = ?, location_lat = ?, location_lon = ?, address = ? WHERE id_shelter = ?";
     private static final String SQL_QUERY_SELECTALL = "SELECT id_shelter, name, description, email, web_site, workgroup_key, reminder_status, bed_capacity, phone_number, location_lat, location_lon, address FROM shelters_shelter";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_shelter FROM shelters_shelter";
+    private static final String SQL_QUERY_SELECT_BY_ADMIN_USER = "SELECT a.id_shelter, a.name, a.description, a.email, a.web_site, a.workgroup_key, a.reminder_status, a.bed_capacity, a.phone_number, a.location_lat, a.location_lon, a.address "
+            + " FROM shelters_shelter a, core_admin_workgroup_user b WHERE a.workgroup_key = b.workgroup_key AND b.id_user = ?";
 
     /**
      * {@inheritDoc }
@@ -229,6 +231,39 @@ public final class ShelterDAO implements IShelterDAO
         while ( daoUtil.next(  ) )
         {
             shelterList.addItem( daoUtil.getInt( 1 ) , daoUtil.getString( 2 ) );
+        }
+
+        daoUtil.free( );
+        return shelterList;
+    }
+
+    @Override
+    public List<Shelter> selectSheltersByAdminUser(int nIdUser, Plugin plugin)
+    {
+        List<Shelter> shelterList = new ArrayList<Shelter>(  );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ADMIN_USER, plugin );
+        daoUtil.setInt( 1, nIdUser);
+        daoUtil.executeQuery(  );
+
+        while ( daoUtil.next(  ) )
+        {
+            Shelter shelter = new Shelter(  );
+            int nIndex = 1;
+            
+            shelter.setId( daoUtil.getInt( nIndex++ ) );
+            shelter.setName( daoUtil.getString( nIndex++ ) );
+            shelter.setDescription( daoUtil.getString( nIndex++ ) );
+            shelter.setEmail( daoUtil.getString( nIndex++ ) );
+            shelter.setWebSite( daoUtil.getString( nIndex++ ) );
+            shelter.setWorkgroupKey( daoUtil.getString( nIndex++ ) );
+            shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
+            shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
+            shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setAddress( daoUtil.getString( nIndex++ ) );
+
+            shelterList.add( shelter );
         }
 
         daoUtil.free( );

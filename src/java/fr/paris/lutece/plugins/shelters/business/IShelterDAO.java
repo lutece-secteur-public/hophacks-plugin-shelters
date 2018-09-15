@@ -95,4 +95,12 @@ public interface IShelterDAO
      * @return The referenceList which contains the data of all the shelter objects
      */
     ReferenceList selectSheltersReferenceList( Plugin plugin );
+
+    /**
+     * Select by admin user
+     * @param nIdUser
+     * @param _plugin
+     * @return 
+     */
+    List<Shelter> selectSheltersByAdminUser(int nIdUser, Plugin _plugin);
 }
