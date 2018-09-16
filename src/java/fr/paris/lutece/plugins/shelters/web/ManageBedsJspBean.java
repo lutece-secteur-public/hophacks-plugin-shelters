@@ -34,10 +34,13 @@
 
 package fr.paris.lutece.plugins.shelters.web;
 
+import fr.paris.lutece.plugins.shelters.business.BedAvailability;
+import fr.paris.lutece.plugins.shelters.business.BedAvailabilityHome;
 import fr.paris.lutece.plugins.shelters.business.Shelter;
 import fr.paris.lutece.plugins.shelters.business.ShelterHome;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +48,39 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ManageBedsJspBean
  */
-@Controller( controllerJsp = "ManageShelters.jsp", controllerPath = "jsp/admin/plugins/shelters/", right = "SHELTERS_MANAGEMENT" )
+@Controller( controllerJsp = "ManageBeds.jsp", controllerPath = "jsp/admin/plugins/shelters/", right = "SHELTERS_BED_MANAGEMENT" )
 public class ManageBedsJspBean extends AbstractManageSheltersJspBean
 {
     // Templates
     private static final String TEMPLATE_MANAGE_BEDS = "/admin/plugins/shelters/manage_beds.html";
-    private static final String VIEW_MANAGE_BEDS = "manageBeds";
+    private static final String TEMPLATE_MODIFY_BEDAVAILABILITY = "/admin/plugins/shelters/modify_bedavailability.html";
+
+
+
+    // Parameters
+    private static final String PARAMETER_ID_SHELTER = "id";
+
+    // Properties for page titles
+    private static final String PROPERTY_PAGE_TITLE_MODIFY_BEDAVAILABILITY = "shelters.modify_bedavailability.pageTitle";
+
+    // Markers
+    private static final String MARK_BEDAVAILABILITY = "bedavailability";
+    private static final String MARK_SHELTER = "shelter";
+
+
+    // Validations
+    private static final String VALIDATION_ATTRIBUTES_PREFIX = "shelters.model.entity.bedavailability.attribute.";
+
+    // Views
+    private static final String VIEW_MANAGE_BEDS = "manageBeds";    
+    private static final String VIEW_MODIFY_BEDAVAILABILITY = "modifyBedAvailability";
+
+    // Actions
+    private static final String ACTION_MODIFY_BEDAVAILABILITY = "modifyBedAvailability";
+
+    // Infos
+    private static final String INFO_BEDAVAILABILITY_UPDATED = "shelters.info.bedavailability.updated";
+
     private static final String MARK_SHELTER_LIST = "shelter_list";
 
     // Properties for page titles
@@ -71,4 +101,67 @@ public class ManageBedsJspBean extends AbstractManageSheltersJspBean
 
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_BEDS, TEMPLATE_MANAGE_BEDS, model );
     }
+    
+    /**
+     * Returns the form to update info about a bedavailability
+     *
+     * @param request The Http request
+     * @return The HTML form to update info
+     */
+    @View( VIEW_MODIFY_BEDAVAILABILITY )
+    public String getModifyBedAvailability( HttpServletRequest request )
+    {
+        int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_SHELTER ) );
+        String strDateCode = "20180916"; // FIXME
+
+        Shelter shelter = ShelterHome.findByPrimaryKey(nId);
+        
+        BedAvailability bedavailability = BedAvailabilityHome.findByPrimaryKey( nId , strDateCode );
+        if( bedavailability == null )
+        {
+            bedavailability = new BedAvailability();
+            bedavailability.setShelterId(nId);
+            bedavailability.setDateCode(strDateCode);
+            bedavailability.setTotalBedCapacity( shelter.getBedCapacity());
+        }
+
+        Map<String, Object> model = getModel(  );
+        model.put( MARK_BEDAVAILABILITY, bedavailability );
+        model.put( MARK_SHELTER, shelter );
+
+        return getPage( PROPERTY_PAGE_TITLE_MODIFY_BEDAVAILABILITY, TEMPLATE_MODIFY_BEDAVAILABILITY, model );
+    }
+
+    /**
+     * Process the change form of a bedavailability
+     *
+     * @param request The Http request
+     * @return The Jsp URL of the process result
+     */
+    @Action( ACTION_MODIFY_BEDAVAILABILITY )
+    public String doModifyBedAvailability( HttpServletRequest request )
+    {
+        BedAvailability bedavailability = new BedAvailability();
+        populate( bedavailability, request, request.getLocale( ) );
+
+        // Check constraints
+        if ( !validateBean( bedavailability, VALIDATION_ATTRIBUTES_PREFIX ) )
+        {
+            return redirect( request, VIEW_MODIFY_BEDAVAILABILITY, PARAMETER_ID_SHELTER, bedavailability.getShelterId( ) );
+        }
+
+        BedAvailability existing = BedAvailabilityHome.findByPrimaryKey( bedavailability.getShelterId(), bedavailability.getDateCode());
+        if( existing == null )
+        {
+            BedAvailabilityHome.create( bedavailability );
+        }
+        else
+        {
+            BedAvailabilityHome.update( bedavailability );
+        }
+        addInfo( INFO_BEDAVAILABILITY_UPDATED, getLocale(  ) );
+
+        return redirectView( request, VIEW_MANAGE_BEDS );
+    }
+    
 }

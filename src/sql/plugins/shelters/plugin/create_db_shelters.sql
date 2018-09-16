@@ -19,3 +19,17 @@ location_lon float(11) default '0',
 address long varchar,
 PRIMARY KEY (id_shelter)
 );
+
+
+--
+-- Structure for table shelters_bed_availability
+--
+
+DROP TABLE IF EXISTS shelters_bed_availability;
+CREATE TABLE shelters_bed_availability (
+id_shelter int  default '0' NOT NULL,
+date_code varchar(50) default '' NOT NULL,
+bed_available_count int default '0' NOT NULL,
+total_bed_capacity int default '0' NOT NULL,
+PRIMARY KEY (id_shelter , date_code )
+);

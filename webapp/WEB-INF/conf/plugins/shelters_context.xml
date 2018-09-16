@@ -5,6 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
 
     <bean id="shelters.shelterDAO" class="fr.paris.lutece.plugins.shelters.business.ShelterDAO" />
+    <bean id="shelters.bedAvailabilityDAO" class="fr.paris.lutece.plugins.shelters.business.BedAvailabilityDAO" />
+
 
 
 </beans>

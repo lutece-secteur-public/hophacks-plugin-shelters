@@ -1,0 +1,20 @@
+
+<@box>
+	<@boxHeader title='#i18n{shelters.modify_bedavailability.title}' />
+	<@boxBody>
+        <h2>${shelter.name}</h2>
+    <@tform class="form-horizontal" method="post" name="modify_bedavailability" action="jsp/admin/plugins/shelters/ManageBeds.jsp">
+			<@messages errors=errors />
+			<input type="hidden" id="shelter_id" name="shelter_id" value="${bedavailability.shelterId}"/>
+			<input type='hidden' name='date_code' value='${bedavailability.dateCode}' />
+			
+                        <@formGroup labelKey='#i18n{shelters.modify_bedavailability.labelBedAvailableCount}' helpKey='#i18n{shelters.modify_bedavailability.labelBedAvailableCount.help}' mandatory=true>
+                                <@input type='text' name='bed_available_count' value='${bedavailability.bedAvailableCount}' />
+                        </@formGroup>
+                        <@formGroup labelKey='#i18n{shelters.modify_bedavailability.labelTotalBedCapacity}' helpKey='#i18n{shelters.modify_bedavailability.labelTotalBedCapacity.help}' >
+                                <@input type='text' name='total_bed_capacity' value='${bedavailability.totalBedCapacity}' />
+                        </@formGroup>
+        <@actionButtons button1Name="action_modifyBedAvailability" button2Name="view_manageBedAvailability"/>
+    </@tform>
+	</@boxBody>
+</@box>
