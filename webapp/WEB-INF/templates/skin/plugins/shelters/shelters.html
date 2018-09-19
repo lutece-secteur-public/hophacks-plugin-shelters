@@ -1,9 +1,6 @@
-<@box>
-	<@boxHeader title='#i18n{shelters.manage_beds.title}' boxTools=true>
-	</@boxHeader>
-	<@boxBody>    
-    <@messages infos=infos />
 
+<@row>
+    <h1>#i18n{shelters.shelters.title}</h1>
     <#list shelter_list as shelter >
     <div class="col-md-4">
         <div style="margin: 10px; padding: 20px;background-color: #eee ">
@@ -19,14 +16,8 @@
             <p>  <i class="fa fa-phone"></i>  <a href="mailto:${shelter.phoneNumber}">${shelter.phoneNumber}</a> </p>
             <p>  <i class="fa fa-at"></i>  <a href="mailto:${shelter.email}">${shelter.email}</a> </p>
             <p>  <i class="fa fa-globe"></i>  <a href="${shelter.webSite}">#i18n{shelters.shelters.website}</a> </p>
-            <div class="pull-right">
-                <@aButton href='jsp/admin/plugins/shelters/ManageBeds.jsp?view=modifyBedAvailability&id=${shelter.id}' title='#i18n{shelters.manage_beds.buttonManageBeds}' buttonIcon='bed' showTitle=true />
-            </div>
         </div>
     </div>
     </#list>
-    
-
-
-  </@boxBody>
-</@box>
+</@row>
+  

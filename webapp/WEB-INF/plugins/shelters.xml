@@ -28,7 +28,7 @@
             <feature-level>1</feature-level>
             <feature-url>jsp/admin/plugins/shelters/ManageShelters.jsp</feature-url>
             <feature-icon-url></feature-icon-url>
-      </admin-feature>
+        </admin-feature>
         <admin-feature>
             <feature-id>SHELTERS_BED_MANAGEMENT</feature-id>
             <feature-title>shelters.adminFeature.ManageBeds.name</feature-title>
@@ -36,14 +36,15 @@
             <feature-level>2</feature-level>
             <feature-url>jsp/admin/plugins/shelters/ManageBeds.jsp</feature-url>
             <feature-icon-url></feature-icon-url>
-      </admin-feature>
+        </admin-feature>
     </admin-features>    
 
     <!-- XPages parameters -->
     <applications>
+        <application>
+            <application-id>shelters</application-id>
+            <application-class>fr.paris.lutece.plugins.shelters.web.SheltersApp</application-class>
+        </application>
     </applications>
 
-    <!-- Portlet parameters -->
-    <portlets>
-   </portlets>
 </plug-in>

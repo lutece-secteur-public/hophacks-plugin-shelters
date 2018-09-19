@@ -76,8 +76,6 @@ public class ShelterJspBean extends MVCAdminJspBean
     private static final String MARK_SHELTER = "shelter";
     private static final String MARK_WORKGROUPS_LIST = "workgroups_list";
     
-    private static final String JSP_MANAGE_SHELTERS = "jsp/admin/plugins/shelters/ManageShelters.jsp";
-
     // Properties
     private static final String MESSAGE_CONFIRM_REMOVE_SHELTER = "shelters.message.confirmRemoveShelter";
 
