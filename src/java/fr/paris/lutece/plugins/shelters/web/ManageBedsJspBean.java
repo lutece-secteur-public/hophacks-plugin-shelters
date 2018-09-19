@@ -37,11 +37,15 @@ package fr.paris.lutece.plugins.shelters.web;
 import fr.paris.lutece.plugins.shelters.business.BedAvailability;
 import fr.paris.lutece.plugins.shelters.business.BedAvailabilityHome;
 import fr.paris.lutece.plugins.shelters.business.Shelter;
+import fr.paris.lutece.plugins.shelters.business.ShelterAvailability;
 import fr.paris.lutece.plugins.shelters.business.ShelterHome;
+import fr.paris.lutece.plugins.shelters.service.DateService;
+import fr.paris.lutece.plugins.shelters.service.ShelterAvailabilityService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -96,8 +100,10 @@ public class ManageBedsJspBean extends AbstractManageSheltersJspBean
     {
         List<Shelter> listShelters = ShelterHome.getSheltersByAdminUser( getUser().getUserId() );
         
+        List<ShelterAvailability> listShelterAvailability = ShelterAvailabilityService.getSheltersAvailability( listShelters, DateService.getToday() , request.getLocale() );
+        
         Map<String, Object> model = getModel();
-        model.put( MARK_SHELTER_LIST, listShelters );
+        model.put( MARK_SHELTER_LIST, listShelterAvailability );
 
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_BEDS, TEMPLATE_MANAGE_BEDS, model );
     }
@@ -112,7 +118,7 @@ public class ManageBedsJspBean extends AbstractManageSheltersJspBean
     public String getModifyBedAvailability( HttpServletRequest request )
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_SHELTER ) );
-        String strDateCode = "20180916"; // FIXME
+        String strDateCode = DateService.getToday();
 
         Shelter shelter = ShelterHome.findByPrimaryKey(nId);
         

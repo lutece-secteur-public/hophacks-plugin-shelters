@@ -7,7 +7,12 @@
     <#list shelter_list as shelter >
     <div class="col-md-4">
         <div style="margin: 10px; padding: 20px;background-color: #eee ">
-            <div class="pull-right">  <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> </div>
+            <div class="pull-right">  
+                <h2>
+                    <span class="badge badge-success">${shelter.availability}</span><br>
+                    <span class="badge badge-secondary">${shelter.bedCapacity} beds</span>
+                </h2> 
+            </div>
             <h2>${shelter.name}</h2>
             <p>    ${shelter.description}</p>
             <p>  <i class="fa map-marker-alt"></i>  ${shelter.address} </p>

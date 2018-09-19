@@ -62,7 +62,7 @@ public class BedAvailabilityBusinessTest extends LuteceTestCase
 
         // Create test
         BedAvailabilityHome.create( bedAvailability );
-        BedAvailability bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ) );
+        BedAvailability bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ), bedAvailability.getDateCode() );
         assertEquals( bedAvailabilityStored.getDateCode() , bedAvailability.getDateCode( ) );
         assertEquals( bedAvailabilityStored.getBedAvailableCount() , bedAvailability.getBedAvailableCount( ) );
         assertEquals( bedAvailabilityStored.getTotalBedCapacity() , bedAvailability.getTotalBedCapacity( ) );
@@ -72,7 +72,7 @@ public class BedAvailabilityBusinessTest extends LuteceTestCase
         bedAvailability.setBedAvailableCount( BEDAVAILABLECOUNT2 );
         bedAvailability.setTotalBedCapacity( TOTALBEDCAPACITY2 );
         BedAvailabilityHome.update( bedAvailability );
-        bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ) );
+        bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ) , bedAvailability.getDateCode());
         assertEquals( bedAvailabilityStored.getDateCode() , bedAvailability.getDateCode( ) );
         assertEquals( bedAvailabilityStored.getBedAvailableCount() , bedAvailability.getBedAvailableCount( ) );
         assertEquals( bedAvailabilityStored.getTotalBedCapacity() , bedAvailability.getTotalBedCapacity( ) );
@@ -81,8 +81,8 @@ public class BedAvailabilityBusinessTest extends LuteceTestCase
         BedAvailabilityHome.getBedAvailabilitysList();
 
         // Delete test
-        BedAvailabilityHome.remove( bedAvailability.getShelterId( ) );
-        bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ) );
+        BedAvailabilityHome.removeAllByShelter( bedAvailability.getShelterId( ) );
+        bedAvailabilityStored = BedAvailabilityHome.findByPrimaryKey( bedAvailability.getShelterId( ), bedAvailability.getDateCode() );
         assertNull( bedAvailabilityStored );
         
     }

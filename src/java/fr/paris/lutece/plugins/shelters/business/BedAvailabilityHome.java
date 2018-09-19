@@ -84,7 +84,7 @@ public final class BedAvailabilityHome
      * Remove the bedAvailability whose identifier is specified in parameter
      * @param nKey The bedAvailability Id
      */
-    public static void remove( int nKey )
+    public static void removeAllByShelter( int nKey )
     {
         _dao.delete( nKey, _plugin );
     }

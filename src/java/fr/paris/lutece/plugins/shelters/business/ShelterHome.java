@@ -87,6 +87,8 @@ public final class ShelterHome
     public static void remove( int nKey )
     {
         _dao.delete( nKey, _plugin );
+        
+        BedAvailabilityHome.removeAllByShelter( nKey );
     }
 
     /**
