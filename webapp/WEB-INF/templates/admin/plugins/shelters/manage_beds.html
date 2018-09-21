@@ -6,7 +6,7 @@
     <div style="display: flex; flex-direction: row; flex-wrap: wrap">
         <#list shelter_list as shelter >
             <div style="margin: 10px; padding: 20px; background-color: #eee; flex-basis: 30%; z-index:1;position: relative">
-            <span style="z-index:10;position: absolute; right: 5px; top: 0; display: block; height: 40px; width: 30px; text-align: center; font-size: 2rem; font-weight: bold" class="bg-<#if shelter.bedAvailable=0>red<#elseif shelter.bedAvailable &gt; 0>green<#else>gray</#if>">${shelter.bedAvailable}</span><br>
+            <span style="z-index:10;position: absolute; right: 5px; top: 0; display: block; height: 40px; width: 30px; text-align: center; font-size: 2rem; font-weight: bold" class="bg-<#if shelter.bedAvailable=0>red<#elseif shelter.bedAvailable &gt; 0>green<#else>gray</#if>"><#if shelter.bedAvailable != -1 >${shelter.bedAvailable}<#else>?</#if></span><br>
             <h1 style="font-size: 2.5rem; font-weight: bold">${shelter.name}</h1>
             <p class="bg-primary" style="padding:5px 15px;">${shelter.availability} / ${shelter.bedCapacity} beds</p>
             <p><em>    ${shelter.description}</em></p>
