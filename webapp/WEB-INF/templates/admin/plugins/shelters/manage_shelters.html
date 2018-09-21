@@ -7,9 +7,9 @@
 	<@boxBody>    
     <@messages infos=infos />
 
-    <#list shelter_list as shelter >
-    <div class="col-md-4">
-        <div style="margin: 10px; padding: 20px;background-color: #eee ">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+        <#list shelter_list as shelter >
+        <div style="margin: 10px; padding: 20px; background-color: #eee; flex-basis: 30%; position: relative">
             <div class="pull-right">  <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> </div>
             <h2>${shelter.name}</h2>
             <p><em>    ${shelter.description}</em></p>
@@ -17,13 +17,13 @@
             <p>  <i class="fa fa-phone"></i>  <a href="mailto:${shelter.phoneNumber}">${shelter.phoneNumber}</a> </p>
             <p>  <i class="fa fa-at"></i>  <a href="mailto:${shelter.email}">${shelter.email}</a> </p>
             <p>  <i class="fa fa-globe"></i>  <a href="${shelter.webSite}">#i18n{shelters.shelters.website}</a> </p>
-            <div class="pull-right">
+            <div style="position: absolute; bottom: 15px; right: 15px;">
                 <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?view=modifyShelter&id=${shelter.id}' title='#i18n{portal.util.labelModify}' buttonIcon='pencil' showTitle=true />
                 <@aButton href='jsp/admin/plugins/shelters/ManageShelters.jsp?action=confirmRemoveShelter&id=${shelter.id}' title='#i18n{portal.util.labelDelete}' buttonIcon='trash' color='btn-danger' showTitle=true />
             </div>
         </div>
+        </#list>
     </div>
-    </#list>
     
 
 
