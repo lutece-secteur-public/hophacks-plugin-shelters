@@ -9,11 +9,14 @@
 			<input type='hidden' name='date_code' value='${bedavailability.dateCode}' />
 			
                         <@formGroup labelKey='#i18n{shelters.modify_bedavailability.labelBedAvailableCount}' helpKey='#i18n{shelters.modify_bedavailability.labelBedAvailableCount.help}' mandatory=true>
-                                <@input type='text' name='bed_available_count' value='${bedavailability.bedAvailableCount}' />
+                                <@input type='number' name='bed_available_count' value='${bedavailability.bedAvailableCount}' />
                         </@formGroup>
+                        <input type='hidden' name='total_bed_capacity' value='${shelter.bedCapacity}' />
+                        <!--
                         <@formGroup labelKey='#i18n{shelters.modify_bedavailability.labelTotalBedCapacity}' helpKey='#i18n{shelters.modify_bedavailability.labelTotalBedCapacity.help}' >
                                 <@input type='text' name='total_bed_capacity' value='${bedavailability.totalBedCapacity}' />
                         </@formGroup>
+                        -->
         <@actionButtons button1Name="action_modifyBedAvailability" button2Name="view_manageBedAvailability"/>
     </@tform>
 	</@boxBody>
