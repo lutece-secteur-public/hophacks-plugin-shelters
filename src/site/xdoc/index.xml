@@ -11,13 +11,31 @@
             </p>
             -->
             <subsection name="Introduction">
-                <p></p>
+                <p>This application aims to provide a realtime information about beds availability in shelters for homeless people.</p>
             </subsection>
             <subsection name="Configuration">
-                <p></p>
+                <p>The administrator should connect to the Lutece Back Office through the URL :</p>
+                <pre>http://myhost:myport/mycontext/jsp/admin/AdminLogin.jsp</pre>
+                <p>
+                    First, the administrator should create a workgroup for each shelter using the feature "Managers/Workgroups Management".
+                </p>
+                <p>
+                    Then the administrator should create all the shelters in the backoffice choosing the feature "Manage Shelters" and select for
+                    each one the corresponding workgroup previously created.
+                </p>
+                <p>
+                    Finally, the administrator should create an user account per shelter with the feature "Managers/Users management" and for each give the right
+                    only to the "Manage Bed Availability" and add the user to the right Workgroup using once again the feature "Managers/Workgroups Management".
+                    
+                </p>
             </subsection>
             <subsection name="Usage">
-                <p></p>
+                <p>The front page that display all shelters ordered by decreasing beds availability can be accessed at :</p>
+                <pre>http://myhost:myport/mycontext/jsp/site/Portal.jsp?page=shelters</pre>
+                <p> </p>
+                <p>A REST API is also available at :</p>
+                <pre>http://myhost:myport/mycontext/rest/shelters/api/v1/shelters               
+                </pre>
             </subsection>
         </section>
     </body>
