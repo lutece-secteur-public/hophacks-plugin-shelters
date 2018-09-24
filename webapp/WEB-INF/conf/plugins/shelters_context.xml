@@ -4,9 +4,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
 
+    <!-- Data Access Objects -->
     <bean id="shelters.shelterDAO" class="fr.paris.lutece.plugins.shelters.business.ShelterDAO" />
     <bean id="shelters.bedAvailabilityDAO" class="fr.paris.lutece.plugins.shelters.business.BedAvailabilityDAO" />
 
+    <!-- REST Web services -->
+    <bean id="shelters.shelterRest" class="fr.paris.lutece.plugins.shelters.rs.ShelterRest" />
+    <bean id="shelters.swaggerRest" class="fr.paris.lutece.plugins.shelters.rs.SwaggerRest" />
 
 
 </beans>
