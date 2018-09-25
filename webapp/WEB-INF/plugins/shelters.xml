@@ -47,4 +47,18 @@
         </application>
     </applications>
 
+
+    <!-- Javascript files -->
+    <javascript-files>
+        <javascript-files-scope>xpage</javascript-files-scope>
+        <javascript-file>shelters/sheltersMap.js</javascript-file>
+    </javascript-files>
+    
+    <!-- CSS files -->
+    <css-stylesheets>
+        <css-stylesheets-scope>portal</css-stylesheets-scope>
+        <css-stylesheet>shelters/shelters.css</css-stylesheet>
+    </css-stylesheets>
+
+    
 </plug-in>

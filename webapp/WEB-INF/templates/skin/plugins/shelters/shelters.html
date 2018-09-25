@@ -1,6 +1,17 @@
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+  integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+  crossorigin=""></script>
+
+<h1>#i18n{shelters.shelters.title}</h1>
+    
+<div id="map"></div>
+
 <@row>
-    <h1>#i18n{shelters.shelters.title}</h1>
+
     <#list shelter_list as shelter >
     <div class="col-md-4">
         <div style="margin: 10px; padding: 20px;background-color: #eee ">
@@ -21,3 +32,21 @@
     </#list>
 </@row>
   
+<script>
+    $( document ).ready(function() {
+        
+        shelterMap = initShelterMap( ${initLat} , ${initLon} , ${initZoom} );
+        
+<#list shelter_list as shelter >
+        // add shelter
+        <#assign icon = 'greenIcon'>
+        <#if shelter.bedAvailable = 0 >
+            <#assign icon = 'redIcon'>
+        </#if>
+        var marker_${shelter.id} = L.marker([${shelter.locationLat?c}, ${shelter.locationLon?c}], {icon: ${icon} } );
+        marker_${shelter.id}.bindPopup("<p>${shelter.name}</p><p><span class='badge badge-success'> ${shelter.availability} </span></p>");
+        marker_${shelter.id}.addTo(shelterMap);
+            
+</#list>
+    });
+</script>

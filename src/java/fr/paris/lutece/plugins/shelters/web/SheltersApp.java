@@ -39,6 +39,7 @@ import fr.paris.lutece.plugins.shelters.business.ShelterAvailability;
 import fr.paris.lutece.plugins.shelters.business.ShelterHome;
 import fr.paris.lutece.plugins.shelters.service.DateService;
 import fr.paris.lutece.plugins.shelters.service.ShelterAvailabilityService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
@@ -59,6 +60,18 @@ public class SheltersApp extends MVCApplication
 
     // Markers
     private static final String MARK_SHELTER_LIST = "shelter_list";
+    private static final String MARK_INIT_LAT = "initLat";
+    private static final String MARK_INIT_LON = "initLon";
+    private static final String MARK_INIT_ZOOM = "initZoom";
+    
+    // Properties
+    private static final String PROPERTY_INIT_LAT =  "shelters.map.initLat" ;
+    private static final String PROPERTY_INIT_LON =  "shelters.map.initLon" ;
+    private static final String PROPERTY_INIT_ZOOM = "shelters.map.initZoom" ;
+    
+    
+    
+    // views
     private static final String VIEW_HOME = "home";
     
     /**
@@ -74,6 +87,11 @@ public class SheltersApp extends MVCApplication
 
         Map<String, Object> model = getModel();
         model.put( MARK_SHELTER_LIST, listShelterAvailability );
+        
+        model.put( MARK_INIT_LAT, AppPropertiesService.getProperty( PROPERTY_INIT_LAT )) ;
+        model.put( MARK_INIT_LON, AppPropertiesService.getProperty( PROPERTY_INIT_LON )) ;
+        model.put( MARK_INIT_ZOOM, AppPropertiesService.getProperty( PROPERTY_INIT_ZOOM )) ;
+        
         return getXPage( TEMPLATE_XPAGE, request.getLocale(  ) , model );
     }
 }
