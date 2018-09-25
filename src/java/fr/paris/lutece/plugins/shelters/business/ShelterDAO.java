@@ -116,8 +116,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getFloat(nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
         }
 
@@ -188,8 +188,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getFloat( nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
 
             shelterList.add( shelter );
@@ -259,8 +259,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getInt( nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getInt( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getFloat( nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
 
             shelterList.add( shelter );
