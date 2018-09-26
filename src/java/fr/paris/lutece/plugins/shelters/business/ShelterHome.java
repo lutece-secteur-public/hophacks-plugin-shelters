@@ -33,10 +33,14 @@
  */
  package fr.paris.lutece.plugins.shelters.business;
 
+import fr.paris.lutece.portal.business.file.File;
+import fr.paris.lutece.portal.business.file.FileHome;
+import fr.paris.lutece.portal.business.physicalfile.PhysicalFileHome;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.util.ReferenceList;
+import java.util.Base64;
 
 import java.util.List;
 
@@ -98,7 +102,11 @@ public final class ShelterHome
      */
     public static Shelter findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin );
+        Shelter shelter = _dao.load( nKey, _plugin ); 
+                
+        addFileContent( shelter );
+        
+        return shelter;
     }
 
     /**
@@ -107,7 +115,14 @@ public final class ShelterHome
      */
     public static List<Shelter> getSheltersList( )
     {
-        return _dao.selectSheltersList( _plugin );
+        List<Shelter> shelterList = _dao.selectSheltersList( _plugin );
+        
+        for (Shelter shelter : shelterList)
+        {
+            addFileContent( shelter );
+        }
+        
+        return shelterList ;
     }
     
     /**
@@ -118,7 +133,7 @@ public final class ShelterHome
     {
         return _dao.selectIdSheltersList( _plugin );
     }
-    
+        
     /**
      * Load the data of all the shelter objects and returns them as a referenceList
      * @return the referenceList which contains the data of all the shelter objects
@@ -134,10 +149,38 @@ public final class ShelterHome
      */
     public static List<Shelter> getSheltersByAdminUser( int nIdUser )
     {
-        return _dao.selectSheltersByAdminUser( nIdUser ,  _plugin );
+        List<Shelter> shelterList = _dao.selectSheltersByAdminUser( nIdUser ,  _plugin );
+        
+        for (Shelter shelter : shelterList)
+        {
+            addFileContent( shelter );
+        }
+        
+        return shelterList ;
     }
     
-    
-    
+    /**
+     * add the image content in base64 and type 
+     * to the shelter
+     * 
+     * @param shelter 
+     */
+    public static void addFileContent( Shelter shelter )
+    {
+        
+        if ( shelter != null )
+        {
+            File file ;
+            file = FileHome.findByPrimaryKey( shelter.getPictureId( ) );
+            
+            if ( file != null ) 
+            {
+                String base64FileContent = Base64.getEncoder().encodeToString( 
+                    PhysicalFileHome.findByPrimaryKey( shelter.getPictureId( ) ).getValue( ) );
+                shelter.setFileContentBase64( base64FileContent );
+                shelter.setFileType(  file.getMimeType( ) );
+            }
+        }
+    }
 }
 

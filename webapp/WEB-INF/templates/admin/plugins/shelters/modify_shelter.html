@@ -1,7 +1,7 @@
 <@box>
 	<@boxHeader title='#i18n{shelters.modify_shelter.title}' />
 	<@boxBody>
-    <@tform class="form-horizontal" method="post" name="modify_shelter" action="jsp/admin/plugins/shelters/ManageShelters.jsp">
+    <form class="form-horizontal" method="post" name="modify_shelter" action="jsp/admin/plugins/shelters/ManageShelters.jsp" enctype="multipart/form-data">
 			<@messages errors=errors />
 			<input type="hidden" id="id" name="id" value="${shelter.id}"/>
 			
@@ -28,16 +28,38 @@
 				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelPhoneNumber}' helpKey='#i18n{shelters.modify_shelter.labelPhoneNumber.help}' >
 					<@input type='text' name='phone_number' value='${shelter.phoneNumber}' />
 				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLat}' helpKey='#i18n{shelters.modify_shelter.labelLocationLat.help}' >
+				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelAddress}' helpKey='#i18n{shelters.modify_shelter.labelAddress.help}' >
+					<@input type='text' name='address' value='${shelter.address}' />
+				</@formGroup>
+                        
+                        	<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLat}' helpKey='#i18n{shelters.modify_shelter.labelLocationLat.help}' >
 					<@input type='text' name='location_lat' value='${shelter.locationLat}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLon}' helpKey='#i18n{shelters.modify_shelter.labelLocationLon.help}' >
 					<@input type='text' name='location_lon' value='${shelter.locationLon}' />
 				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelAddress}' helpKey='#i18n{shelters.modify_shelter.labelAddress.help}' >
-					<@input type='text' name='address' value='${shelter.address}' />
+                        
+                                <@formGroup labelKey='#i18n{shelters.modify_shelter.labelPicture}' helpKey='#i18n{shelters.modify_shelter.labelPicture.help}' >
+					<input type='hidden' name='picture_id' id='picture_id' value='${shelter.pictureId}' />
+                                        <input type="file" name='picture' id='picture' /> 
+                                        <#if shelter.fileContentBase64?? >
+                                        <img src="data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}" width="100%" id="picture_src">
+                                        </#if>
 				</@formGroup>
         <@actionButtons button1Name="action_modifyShelter" button2Name="view_manageShelter"/>
-    </@tform>
+    </form>
 	</@boxBody>
 </@box>
+
+<script >
+$( document ).ready( function( ) 
+{
+
+    $('#picture').change( function(e) {
+        $('#picture_id').val(0);
+        $('#picture_src').hide();
+    });
+    
+});
+</script>
+  

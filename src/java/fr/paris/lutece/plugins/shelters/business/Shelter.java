@@ -79,6 +79,11 @@ public class Shelter implements Serializable
     private float _nLocationLon;
     
     private String _strAddress;
+    
+    private int _nPictureId;
+    
+    private String _base64Img;
+    private String _strFileType;
 
     /**
      * Returns the Id
@@ -295,4 +300,60 @@ public class Shelter implements Serializable
     {
         _strAddress = strAddress;
     }
+    
+    /**
+     * get picture id
+     * 
+     * @return the id
+     */
+    public int getPictureId() {
+        return _nPictureId;
+    }
+
+    /**
+     * set picture id
+     * 
+     * @param nPictureId 
+     */
+    public void setPictureId(int nPictureId) {
+        this._nPictureId = nPictureId;
+    }
+
+    /**
+     * get base 64 image
+     * 
+     * @return the image
+     */
+    public String getFileContentBase64() {
+        return _base64Img;
+    }
+
+    /**
+     * set base 64 image
+     * @param _base64Img 
+     */
+    public void setFileContentBase64(String _base64Img) {
+        this._base64Img = _base64Img;
+    }
+
+    /**
+     * get image type
+     * 
+     * @return image type
+     */
+    public String getFileType() {
+        return _strFileType;
+    }
+
+    /**
+     * set image type
+     * 
+     * @param strType 
+     */
+    public void setFileType(String strType) {
+        this._strFileType = strType;
+    }
+    
+    
+    
 }

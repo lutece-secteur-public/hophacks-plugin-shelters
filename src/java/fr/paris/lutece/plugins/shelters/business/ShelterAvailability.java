@@ -54,6 +54,9 @@ public class ShelterAvailability extends Shelter implements Comparable
         setLocationLon( shelter.getLocationLon() );
         setPhoneNumber( shelter.getPhoneNumber() );
         setWebSite( shelter.getWebSite() );
+        setPictureId( shelter.getPictureId( ) );
+        setFileType( shelter.getFileType( ) );
+        setFileContentBase64( shelter.getFileContentBase64( ) );
         
         _nBedAvailable = -1;
         _strAvailability = "Unknown";

@@ -2,7 +2,7 @@ var greenIcon;
 var redIcon ;
     
 function initShelterMap(lat, lon, zoom) {
-    var map = new L.Map('map');
+    var map = new L.Map( 'map' );
 
     var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osmAttrib='Map data © OpenStreetMap contributors';

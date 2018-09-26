@@ -27,6 +27,9 @@
             <p>  <i class="fa fa-phone"></i>  <a href="mailto:${shelter.phoneNumber}">${shelter.phoneNumber}</a> </p>
             <p>  <i class="fa fa-at"></i>  <a href="mailto:${shelter.email}">${shelter.email}</a> </p>
             <p>  <i class="fa fa-globe"></i>  <a href="${shelter.webSite}">#i18n{shelters.shelters.website}</a> </p>
+            <#if shelter.fileContentBase64?? >
+            <p>  <img src='data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}' width='100%'> </p>
+            </#if>
         </div>
     </div>
     </#list>

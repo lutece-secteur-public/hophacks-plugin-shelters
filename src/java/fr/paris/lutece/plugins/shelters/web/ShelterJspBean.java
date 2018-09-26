@@ -36,6 +36,9 @@ package fr.paris.lutece.plugins.shelters.web;
 
 import fr.paris.lutece.plugins.shelters.business.Shelter;
 import fr.paris.lutece.plugins.shelters.business.ShelterHome;
+import fr.paris.lutece.portal.business.file.File;
+import fr.paris.lutece.portal.business.file.FileHome;
+import fr.paris.lutece.portal.business.physicalfile.PhysicalFile;
 import fr.paris.lutece.portal.business.workgroup.AdminWorkgroup;
 import fr.paris.lutece.portal.business.workgroup.AdminWorkgroupHome;
 import fr.paris.lutece.portal.service.message.AdminMessage;
@@ -44,6 +47,7 @@ import fr.paris.lutece.portal.util.mvc.admin.MVCAdminJspBean;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.portal.web.upload.MultipartHttpServletRequest;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.url.UrlItem;
 import java.util.Collection;
@@ -51,6 +55,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.fileupload.FileItem;
 
 /**
  * This class provides the user interface to manage Shelter features ( manage, create, modify, remove )
@@ -126,7 +131,7 @@ public class ShelterJspBean extends MVCAdminJspBean
     @View( VIEW_CREATE_SHELTER )
     public String getCreateShelter( HttpServletRequest request )
     {
-        _shelter = ( _shelter != null ) ? _shelter : new Shelter(  );
+        _shelter = ( _shelter != null && _shelter.getId( ) == 0 ) ? _shelter : new Shelter(  );
 
         Collection<AdminWorkgroup> workgroupsList = AdminWorkgroupHome.findAll();
         ReferenceList listWorkgroups = ReferenceList.convert( workgroupsList, "key" , "description", false );
@@ -156,6 +161,27 @@ public class ShelterJspBean extends MVCAdminJspBean
             return redirectView( request, VIEW_CREATE_SHELTER );
         }
 
+        if ( _shelter.getPictureId( ) == 0 ) 
+            {
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            FileItem fileItem = multipartRequest.getFile( "picture" );
+
+            if (fileItem != null && fileItem.getSize( )>0)
+            {
+                File file = new File( );
+                file.setTitle( fileItem.getName( ) );
+                file.setSize( (int) fileItem.getSize( ) );
+                file.setMimeType( fileItem.getContentType( ) );
+
+                PhysicalFile physicalFile = new PhysicalFile( );
+                physicalFile.setValue( fileItem.get( ) );
+                file.setPhysicalFile( physicalFile );
+                int fileId = FileHome.create( file );
+
+                _shelter.setPictureId( fileId );
+            }
+        }
+        
         ShelterHome.create( _shelter );
         addInfo( INFO_SHELTER_CREATED, getLocale(  ) );
 
@@ -212,7 +238,7 @@ public class ShelterJspBean extends MVCAdminJspBean
         {
             _shelter = ShelterHome.findByPrimaryKey( nId );
         }
-
+        
         Collection<AdminWorkgroup> workgroupsList = AdminWorkgroupHome.findAll();
         ReferenceList listWorkgroups = ReferenceList.convert( workgroupsList, "key" , "description", false );
 
@@ -240,6 +266,29 @@ public class ShelterJspBean extends MVCAdminJspBean
             return redirect( request, VIEW_MODIFY_SHELTER, PARAMETER_ID_SHELTER, _shelter.getId( ) );
         }
 
+        // is there a new picture ?
+        if (_shelter.getPictureId( ) == 0 ) 
+        {
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            FileItem fileItem = multipartRequest.getFile( "picture" );
+
+            if (fileItem != null)
+            {
+                File file = new File( );
+                file.setTitle( fileItem.getName( ) );
+                file.setSize( (int) fileItem.getSize( ) );
+                file.setMimeType( fileItem.getContentType( ) );
+
+                PhysicalFile physicalFile = new PhysicalFile( );
+                physicalFile.setValue( fileItem.get( ) );
+                file.setPhysicalFile( physicalFile );
+                int fileId = FileHome.create( file );
+
+                _shelter.setPictureId( fileId );
+            }
+        }
+        
+        
         ShelterHome.update( _shelter );
         addInfo( INFO_SHELTER_UPDATED, getLocale(  ) );
 

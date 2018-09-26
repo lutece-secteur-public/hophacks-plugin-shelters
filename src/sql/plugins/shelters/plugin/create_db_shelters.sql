@@ -17,6 +17,7 @@ phone_number varchar(50) default '',
 location_lat float(11) default '0',
 location_lon float(11) default '0',
 address long varchar,
+id_picture int default '0',
 PRIMARY KEY (id_shelter)
 );
 

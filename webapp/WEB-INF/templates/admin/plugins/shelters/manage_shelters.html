@@ -10,8 +10,11 @@
     <div style="display: flex; flex-direction: row; flex-wrap: wrap">
         <#list shelter_list as shelter >
         <div style="margin: 10px; padding: 20px; background-color: #eee; flex-basis: 30%; position: relative">
-            <div class="pull-right">  <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> </div>
+            <#if shelter.fileContentBase64?? >
+                <div class="pull-right"> <img src="data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}" width="200px"> </div>
+            </#if>
             <h2>${shelter.name}</h2>
+            <h3><span class="badge badge-secondary">${shelter.bedCapacity} beds</span></h3> 
             <p><em>    ${shelter.description}</em></p>
             <p>  <i class="fa fa-map-marker"></i>  ${shelter.address} </p>
             <p>  <i class="fa fa-phone"></i>  <a href="mailto:${shelter.phoneNumber}">${shelter.phoneNumber}</a> </p>

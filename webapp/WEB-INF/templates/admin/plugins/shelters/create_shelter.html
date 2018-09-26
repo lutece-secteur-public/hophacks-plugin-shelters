@@ -1,7 +1,7 @@
 <@box>
 	<@boxHeader title='#i18n{shelters.create_shelter.title}' />
 	<@boxBody>
-    <@tform name='create_shelter' action='jsp/admin/plugins/shelters/ManageShelters.jsp'>
+    <form name='create_shelter' method=post action='jsp/admin/plugins/shelters/ManageShelters.jsp' class="form-horizontal"  enctype="multipart/form-data">
 
         <@messages errors=errors />
         <input type="hidden" id="id" name="id"/>
@@ -39,8 +39,13 @@
 				<@formGroup labelKey='#i18n{shelters.create_shelter.labelAddress}' helpKey='#i18n{shelters.create_shelter.labelAddress.help}' >
 					<@input type='text' name='address' value='${shelter.address!\'\'}' />
 				</@formGroup>
+        
+                                <@formGroup labelKey='#i18n{shelters.create_shelter.labelPicture}' helpKey='#i18n{shelters.create_shelter.labelPicture.help}' >
+					<input type='hidden' name='picture_id' id='picture_id' value='${shelter.pictureId}' />
+                                        <input type="file" name='picture' id='picture' /> 
+				</@formGroup>
 				
 				<@actionButtons button1Name="action_createShelter" button2Name="view_manageShelter"/>
-    </@tform>
+    </form>
 	</@boxBody>
 </@box>
