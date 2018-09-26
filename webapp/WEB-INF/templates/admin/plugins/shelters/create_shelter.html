@@ -10,7 +10,7 @@
 					<@input type='text' name='name' value='${shelter.name!\'\'}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.create_shelter.labelDescription}' helpKey='#i18n{shelters.create_shelter.labelDescription.help}' >
-					<@input type='text' name='description' value='${shelter.description!\'\'}' />
+					<@input type='textarea' name='description' >${shelter.description!''}</@input>
 				</@formGroup>
 				<@formGroup labelKey='#i18n{shelters.create_shelter.labelEmail}' helpKey='#i18n{shelters.create_shelter.labelEmail.help}' mandatory=true>
 					<@input type='text' name='email' value='${shelter.email!\'\'}' />

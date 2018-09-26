@@ -2,50 +2,47 @@
 	<@boxHeader title='#i18n{shelters.modify_shelter.title}' />
 	<@boxBody>
     <form class="form-horizontal" method="post" name="modify_shelter" action="jsp/admin/plugins/shelters/ManageShelters.jsp" enctype="multipart/form-data">
-			<@messages errors=errors />
-			<input type="hidden" id="id" name="id" value="${shelter.id}"/>
-			
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelName}' helpKey='#i18n{shelters.modify_shelter.labelName.help}' mandatory=true>
-					<@input type='text' name='name' value='${shelter.name}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelDescription}' helpKey='#i18n{shelters.modify_shelter.labelDescription.help}' >
-					<@input type='text' name='description' value='${shelter.description}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelEmail}' helpKey='#i18n{shelters.modify_shelter.labelEmail.help}' mandatory=true>
-					<@input type='text' name='email' value='${shelter.email}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelWebSite}' helpKey='#i18n{shelters.modify_shelter.labelWebSite.help}' >
-					<@input type='text' name='web_site' value='${shelter.webSite}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelWorkgroupKey}' helpKey='#i18n{shelters.modify_shelter.labelWorkgroupKey.help}' mandatory=true>
-                                    <@select name='workgroup_key' id='workgroup_key' default_value='${shelter.workgroupKey!\'\'}' items=workgroups_list sort=true />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelReminderStatus}' helpKey='#i18n{shelters.modify_shelter.labelReminderStatus.help}' >
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelBedCapacity}' helpKey='#i18n{shelters.modify_shelter.labelBedCapacity.help}' >
-					<@input type='text' name='bed_capacity' value='${shelter.bedCapacity}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelPhoneNumber}' helpKey='#i18n{shelters.modify_shelter.labelPhoneNumber.help}' >
-					<@input type='text' name='phone_number' value='${shelter.phoneNumber}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelAddress}' helpKey='#i18n{shelters.modify_shelter.labelAddress.help}' >
-					<@input type='text' name='address' value='${shelter.address}' />
-				</@formGroup>
-                        
-                        	<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLat}' helpKey='#i18n{shelters.modify_shelter.labelLocationLat.help}' >
-					<@input type='text' name='location_lat' value='${shelter.locationLat}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLon}' helpKey='#i18n{shelters.modify_shelter.labelLocationLon.help}' >
-					<@input type='text' name='location_lon' value='${shelter.locationLon}' />
-				</@formGroup>
-                        
-                                <@formGroup labelKey='#i18n{shelters.modify_shelter.labelPicture}' helpKey='#i18n{shelters.modify_shelter.labelPicture.help}' >
-					<input type='hidden' name='picture_id' id='picture_id' value='${shelter.pictureId}' />
-                                        <input type="file" name='picture' id='picture' /> 
-                                        <#if shelter.fileContentBase64?? >
-                                        <img src="data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}" width="100%" id="picture_src">
-                                        </#if>
-				</@formGroup>
+		<@messages errors=errors />
+		<input type="hidden" id="id" name="id" value="${shelter.id}">
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelName}' helpKey='#i18n{shelters.modify_shelter.labelName.help}' mandatory=true>
+			<@input type='text' name='name' value='${shelter.name}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelDescription}' helpKey='#i18n{shelters.modify_shelter.labelDescription.help}' >
+			<@input type='textarea' name='description' >${shelter.description}</@input>
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelEmail}' helpKey='#i18n{shelters.modify_shelter.labelEmail.help}' mandatory=true>
+			<@input type='text' name='email' value='${shelter.email}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelWebSite}' helpKey='#i18n{shelters.modify_shelter.labelWebSite.help}' >
+			<@input type='text' name='web_site' value='${shelter.webSite}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelWorkgroupKey}' helpKey='#i18n{shelters.modify_shelter.labelWorkgroupKey.help}' mandatory=true>
+            <@select name='workgroup_key' id='workgroup_key' default_value='${shelter.workgroupKey!\'\'}' items=workgroups_list sort=true />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelReminderStatus}' helpKey='#i18n{shelters.modify_shelter.labelReminderStatus.help}' >
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelBedCapacity}' helpKey='#i18n{shelters.modify_shelter.labelBedCapacity.help}' >
+			<@input type='text' name='bed_capacity' value='${shelter.bedCapacity}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelPhoneNumber}' helpKey='#i18n{shelters.modify_shelter.labelPhoneNumber.help}' >
+			<@input type='text' name='phone_number' value='${shelter.phoneNumber}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelAddress}' helpKey='#i18n{shelters.modify_shelter.labelAddress.help}' >
+			<@input type='text' name='address' value='${shelter.address}' />
+		</@formGroup>
+        <@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLat}' helpKey='#i18n{shelters.modify_shelter.labelLocationLat.help}' >
+			<@input type='text' name='location_lat' value='${shelter.locationLat}' />
+		</@formGroup>
+		<@formGroup labelKey='#i18n{shelters.modify_shelter.labelLocationLon}' helpKey='#i18n{shelters.modify_shelter.labelLocationLon.help}' >
+			<@input type='text' name='location_lon' value='${shelter.locationLon}' />
+		</@formGroup>
+        <@formGroup labelKey='#i18n{shelters.modify_shelter.labelPicture}' helpKey='#i18n{shelters.modify_shelter.labelPicture.help}' >
+			<input type='hidden' name='picture_id' id='picture_id' value='${shelter.pictureId}'>
+            <input type="file" name='picture' id='picture'> 
+			<#if shelter.fileContentBase64?? >
+            	<img src="data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}" class="img-thumbnail" id="picture_src">
+            </#if>
+		</@formGroup>
         <@actionButtons button1Name="action_modifyShelter" button2Name="view_manageShelter"/>
     </form>
 	</@boxBody>
