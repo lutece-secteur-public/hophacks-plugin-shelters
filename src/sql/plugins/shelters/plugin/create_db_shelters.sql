@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS shelters_shelter;
 CREATE TABLE shelters_shelter (
 id_shelter int AUTO_INCREMENT,
 name varchar(100) default '' NOT NULL,
-description varchar(500) default '',
+description varchar(2000) default '',
 email varchar(255) default '' NOT NULL,
 web_site varchar(255) default '',
 workgroup_key varchar(50) default '' NOT NULL,

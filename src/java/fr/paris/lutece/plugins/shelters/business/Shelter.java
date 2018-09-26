@@ -53,7 +53,7 @@ public class Shelter implements Serializable
     @Size( max = 50 , message = "#i18n{shelters.validation.shelter.Name.size}" ) 
     private String _strName;
     
-    @Size( max = 255 , message = "#i18n{shelters.validation.shelter.Description.size}" ) 
+    @Size( max = 2000 , message = "#i18n{shelters.validation.shelter.Description.size}" ) 
     private String _strDescription;
     @Email(message = "#i18n{portal.validation.message.email}")
     @NotEmpty( message = "#i18n{shelters.validation.shelter.Email.notEmpty}" )
