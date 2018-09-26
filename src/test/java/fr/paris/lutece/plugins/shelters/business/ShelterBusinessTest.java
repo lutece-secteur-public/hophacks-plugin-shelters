@@ -58,10 +58,10 @@ public class ShelterBusinessTest extends LuteceTestCase
     private static final int BEDCAPACITY2 = 2;
     private static final String PHONENUMBER1 = "PhoneNumber1";
     private static final String PHONENUMBER2 = "PhoneNumber2";
-    private static final int LOCATIONLAT1 = 1;
-    private static final int LOCATIONLAT2 = 2;
-    private static final int LOCATIONLON1 = 1;
-    private static final int LOCATIONLON2 = 2;
+    private static final String LOCATIONLAT1 = "1";
+    private static final String LOCATIONLAT2 = "2";
+    private static final String LOCATIONLON1 = "1";
+    private static final String LOCATIONLON2 = "2";
     private static final String ADDRESS1 = "Address1";
     private static final String ADDRESS2 = "Address2";
 
