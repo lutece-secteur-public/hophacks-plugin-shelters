@@ -190,8 +190,8 @@ public class ShelterRest
 	    shelter.setReminderStatus( Boolean.parseBoolean( reminder_status ) );
 	    shelter.setBedCapacity( Integer.parseInt( bed_capacity ) );
     	shelter.setPhoneNumber( phone_number );
-	    shelter.setLocationLat( Integer.parseInt( location_lat ) );
-	    shelter.setLocationLon( Integer.parseInt( location_lon ) );
+	    shelter.setLocationLat(  location_lat  );
+	    shelter.setLocationLon(  location_lon  );
     	shelter.setAddress( address );
         ShelterHome.create( shelter );
         
@@ -291,8 +291,8 @@ public class ShelterRest
 	    shelter.setReminderStatus( Boolean.parseBoolean( reminder_status ) );
 	    shelter.setBedCapacity( Integer.parseInt( bed_capacity ) );
     	shelter.setPhoneNumber( phone_number );
-	    shelter.setLocationLat( Integer.parseInt( location_lat ) );
-	    shelter.setLocationLon( Integer.parseInt( location_lon ) );
+	    shelter.setLocationLat(  location_lat  );
+	    shelter.setLocationLon(  location_lon  );
     	shelter.setAddress( address );
         ShelterHome.update( shelter );
         

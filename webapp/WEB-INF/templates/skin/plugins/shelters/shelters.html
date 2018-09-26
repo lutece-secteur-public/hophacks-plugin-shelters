@@ -46,7 +46,7 @@
         <#if shelter.bedAvailable = 0 >
             <#assign icon = 'redIcon'>
         </#if>
-        var marker_${shelter.id} = L.marker([${shelter.locationLat?c}, ${shelter.locationLon?c}], {icon: ${icon} } );
+        var marker_${shelter.id} = L.marker([${shelter.locationLat}, ${shelter.locationLon}], {icon: ${icon} } );
         marker_${shelter.id}.bindPopup("<p>${shelter.name}</p><p><span class='badge badge-success'> ${shelter.availability} </span></p>");
         marker_${shelter.id}.addTo(shelterMap);
             

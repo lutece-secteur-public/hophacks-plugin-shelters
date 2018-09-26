@@ -76,8 +76,8 @@ public final class ShelterDAO implements IShelterDAO
             daoUtil.setBoolean( nIndex++ , shelter.getReminderStatus( ) );
             daoUtil.setInt( nIndex++ , shelter.getBedCapacity( ) );
             daoUtil.setString( nIndex++ , shelter.getPhoneNumber( ) );
-            daoUtil.setFloat( nIndex++ , shelter.getLocationLat( ) );
-            daoUtil.setFloat( nIndex++ , shelter.getLocationLon( ) );
+            daoUtil.setString( nIndex++ , shelter.getLocationLat( ) );
+            daoUtil.setString( nIndex++ , shelter.getLocationLon( ) );
             daoUtil.setString( nIndex++ , shelter.getAddress( ) );
             daoUtil.setInt( nIndex++, shelter.getPictureId( ) );
             
@@ -118,8 +118,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getFloat(nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getString(nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getString( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
             shelter.setPictureId( daoUtil.getInt( nIndex++ ) );
         }
@@ -158,8 +158,8 @@ public final class ShelterDAO implements IShelterDAO
         daoUtil.setBoolean( nIndex++ , shelter.getReminderStatus( ) );
         daoUtil.setInt( nIndex++ , shelter.getBedCapacity( ) );
         daoUtil.setString( nIndex++ , shelter.getPhoneNumber( ) );
-        daoUtil.setFloat( nIndex++ , shelter.getLocationLat( ) );
-        daoUtil.setFloat( nIndex++ , shelter.getLocationLon( ) );
+        daoUtil.setString( nIndex++ , shelter.getLocationLat( ) );
+        daoUtil.setString( nIndex++ , shelter.getLocationLon( ) );
         daoUtil.setString( nIndex++ , shelter.getAddress( ) );
         daoUtil.setInt( nIndex++ , shelter.getPictureId( ) );
         
@@ -193,8 +193,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getFloat( nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getString( nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getString( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
             shelter.setPictureId( daoUtil.getInt( nIndex++ ) );
 
@@ -265,8 +265,8 @@ public final class ShelterDAO implements IShelterDAO
             shelter.setReminderStatus( daoUtil.getBoolean( nIndex++ ) );
             shelter.setBedCapacity( daoUtil.getInt( nIndex++ ) );
             shelter.setPhoneNumber( daoUtil.getString( nIndex++ ) );
-            shelter.setLocationLat( daoUtil.getFloat( nIndex++ ) );
-            shelter.setLocationLon( daoUtil.getFloat( nIndex++ ) );
+            shelter.setLocationLat( daoUtil.getString( nIndex++ ) );
+            shelter.setLocationLon( daoUtil.getString( nIndex++ ) );
             shelter.setAddress( daoUtil.getString( nIndex++ ) );
             shelter.setPictureId( daoUtil.getInt( nIndex++ ) );
 
