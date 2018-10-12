@@ -155,12 +155,6 @@ public class ShelterJspBean extends MVCAdminJspBean
     {
         populate( _shelter, request, request.getLocale( ) );
 
-        // Check constraints
-        if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )
-        {
-            return redirectView( request, VIEW_CREATE_SHELTER );
-        }
-
         if ( _shelter.getPictureId( ) == 0 ) 
             {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -179,7 +173,16 @@ public class ShelterJspBean extends MVCAdminJspBean
                 int fileId = FileHome.create( file );
 
                 _shelter.setPictureId( fileId );
+                
+                // reinit file content (in case of invalid bean validation)
+                ShelterHome.addFileContent( _shelter );
             }
+        }
+        
+                // Check constraints
+        if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )
+        {
+            return redirectView( request, VIEW_CREATE_SHELTER );
         }
         
         ShelterHome.create( _shelter );
@@ -260,11 +263,6 @@ public class ShelterJspBean extends MVCAdminJspBean
     {
         populate( _shelter, request, request.getLocale( ) );
 
-        // Check constraints
-        if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )
-        {
-            return redirect( request, VIEW_MODIFY_SHELTER, PARAMETER_ID_SHELTER, _shelter.getId( ) );
-        }
 
         // is there a new picture ?
         if (_shelter.getPictureId( ) == 0 ) 
@@ -285,9 +283,17 @@ public class ShelterJspBean extends MVCAdminJspBean
                 int fileId = FileHome.create( file );
 
                 _shelter.setPictureId( fileId );
+                
+                // reinit file content (in case of invalid bean validation)
+                ShelterHome.addFileContent( _shelter );
             }
         }
         
+        // Check constraints
+        if ( !validateBean( _shelter, VALIDATION_ATTRIBUTES_PREFIX ) )
+        {
+            return redirect( request, VIEW_MODIFY_SHELTER, PARAMETER_ID_SHELTER, _shelter.getId( ) );
+        }
         
         ShelterHome.update( _shelter );
         addInfo( INFO_SHELTER_UPDATED, getLocale(  ) );

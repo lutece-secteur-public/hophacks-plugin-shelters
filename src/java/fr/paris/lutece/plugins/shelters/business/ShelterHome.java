@@ -35,6 +35,7 @@
 
 import fr.paris.lutece.portal.business.file.File;
 import fr.paris.lutece.portal.business.file.FileHome;
+import fr.paris.lutece.portal.business.physicalfile.PhysicalFile;
 import fr.paris.lutece.portal.business.physicalfile.PhysicalFileHome;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
@@ -175,10 +176,14 @@ public final class ShelterHome
             
             if ( file != null ) 
             {
-                String base64FileContent = Base64.getEncoder().encodeToString( 
-                    PhysicalFileHome.findByPrimaryKey( shelter.getPictureId( ) ).getValue( ) );
-                shelter.setFileContentBase64( base64FileContent );
-                shelter.setFileType(  file.getMimeType( ) );
+                PhysicalFile pf = PhysicalFileHome.findByPrimaryKey(shelter.getPictureId( ) );
+                
+                if ( pf != null && pf.getValue( ) !=null) 
+                {
+                    String base64FileContent = Base64.getEncoder().encodeToString( pf.getValue( ) );
+                    shelter.setFileContentBase64( base64FileContent );
+                    shelter.setFileType(  file.getMimeType( ) );
+                }
             }
         }
     }

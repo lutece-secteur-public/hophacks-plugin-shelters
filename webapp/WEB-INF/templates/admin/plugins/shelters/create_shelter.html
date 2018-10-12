@@ -43,9 +43,24 @@
                                 <@formGroup labelKey='#i18n{shelters.create_shelter.labelPicture}' helpKey='#i18n{shelters.create_shelter.labelPicture.help}' >
 					<input type='hidden' name='picture_id' id='picture_id' value='${shelter.pictureId}' />
                                         <input type="file" name='picture' id='picture' /> 
+                                        <#if shelter.fileContentBase64?? >
+                                        <img src="data:${shelter.fileType!''};base64, ${shelter.fileContentBase64!''}" width="100%" id="picture_src">
+                                        </#if>
 				</@formGroup>
 				
 				<@actionButtons button1Name="action_createShelter" button2Name="view_manageShelter"/>
     </form>
 	</@boxBody>
 </@box>
+
+<script >
+$( document ).ready( function( ) 
+{
+
+    $('#picture').change( function(e) {
+        $('#picture_id').val(0);
+        $('#picture_src').hide();
+    });
+    
+});
+</script>
